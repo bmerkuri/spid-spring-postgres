@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Spid;
 import com.example.demo.model.User;
 import com.example.demo.utils.Status;
+import com.example.demo.utils.Type;
 import com.example.demo.utils.arr;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,9 @@ public class SpidService {
         throw new Exception(String.format("Spid with an id:'%d' does not exists!", id));
     }
 
-    public Spid createSpid(User user) {
+    public Spid createsSpid(User user) {
         long id = arr.iota();
-        Spid spid = new Spid(id, new Date(), user);
+        Spid spid = new Spid(id, new Date(),new Date(), user);
         user.setSpid(spid);
         data.add(spid);
         System.out.println(String.format("Spid %d created successfully!", id));
@@ -34,13 +35,16 @@ public class SpidService {
     }
 
 
-    public void modifySpid(long id, Status status) throws Exception {
+    public void modifySpid(long id, Status status, Type type) throws Exception {
         getSpid(id).setStatus(status);
+        getSpid(id).setType(type);
     }
 
 
     public void aproveSpid(long id) throws Exception {
         getSpid(id).setStatus(Status.APPROVED);
+        getSpid(id).setType(Type.LEVEL_2);
+
     }
 
 
@@ -48,4 +52,5 @@ public class SpidService {
         System.out.println("\nList of SPIDs: ");
         data.forEach(el -> System.out.println("\t" + el));
     }
+
 }

@@ -28,12 +28,12 @@ public class UserService {
         throw new Exception("Username does not exists!");
     }
 
-    public User createUser(String name, String surname, String username) throws Exception {
+    public User createUser(String name, String surname, String username,String email,String cardNo,String password) throws Exception {
         if (doesUsernameExists(username)) {
             throw new Exception("Username already in use!");
         }
         long id = arr.iota();
-        User user = new User(id, new Date(), name, surname, username);
+        User user = new User(id, new Date(), name, surname, username,email,cardNo,password);
         data.add(user);
         usernames.add(username);
         System.out.println(String.format("User %d was created successfully!", id));
@@ -41,7 +41,7 @@ public class UserService {
     }
 
 
-    public void modifyUser(String username, String name, String surname) throws Exception {
+    public void modifyUser(String username, String name, String surname,String email,String cardNo,String password) throws Exception {
         if (name != null) {
             getUser(username).setName(name);
         }
@@ -49,6 +49,18 @@ public class UserService {
         if (surname != null) {
             getUser(username).setSurname(surname);
         }
+        if (email != null) {
+            getUser(username).setEmail(email);
+        }
+
+        if (cardNo != null) {
+            getUser(username).setCardNo(cardNo);
+        }
+        if (password != null) {
+            getUser(username).setPassword(password);
+        }
+
+
     }
 
 

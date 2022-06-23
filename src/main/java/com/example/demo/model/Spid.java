@@ -1,35 +1,42 @@
 package com.example.demo.model;
 
 import com.example.demo.utils.Status;
-import lombok.AllArgsConstructor;
+import com.example.demo.utils.Type;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "Spid")
 public class Spid extends Base {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne
+    @JoinColumn(name = "userId")
     private User user;
     private Status status;
-
-    public Spid(){
-
-    }
+    private Type type;
 
 
-    public Spid(long id, Date createdAt, User user) {
-        super(id, createdAt);
+
+    public Spid(LocalDateTime createdAt, String createdBy, User user, long id, Status status, Type type) {
+        super(createdAt, createdBy);
+        this.id = id;
+        this.status = status;
+        this.type = type;
         this.user = user;
-        this.status = Status.PENDING; // Setting to default state
     }
 
-    @Override
-    public String toString() {
-        return "Spid{" +
-                "user=" + user +
-                ", status=" + status +
-                '}';
+
+    public Spid() {
+
     }
+
 }

@@ -2,35 +2,37 @@ package com.example.demo.model;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Date;
 @Getter
 @Setter
+@Entity
+@Table(name = "users")
 public class User extends Base {
+    @Id
+    private long id;
     private String name;
     private String surname;
+    private String cardNo;
     private String username;
-    private Spid spid;
+    private String password;
+    private String email;
 
-
-    public User(){
-
-    }
-
-    public User(long id, Date createdAt, String name, String surname, String username) {
-        super(id, createdAt);
+    public User(long id, LocalDateTime createdAt, String createdBy, String name, String surname, String cardNo, String username, String password, String email) {
+        super(createdAt, createdBy);
+        this.id = id;
         this.name = name;
         this.surname = surname;
+        this.cardNo = cardNo;
         this.username = username;
-    }
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + getId() + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+        this.password = password;
+        this.email = email;
     }
 
-
+    public User() {
+        super();
+    }
 }
