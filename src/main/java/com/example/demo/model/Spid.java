@@ -20,20 +20,19 @@ public class Spid extends Base {
 
     @OneToOne
     @JoinColumn(name = "userId")
-    private User user;
+    private User userId;
+
     private Status status;
     private Type type;
 
 
-
-    public Spid(LocalDateTime createdAt, String createdBy, User user, long id, Status status, Type type) {
+    public Spid(LocalDateTime createdAt, String createdBy, long id, User userId, Status status, Type type) {
         super(createdAt, createdBy);
         this.id = id;
+        this.userId = userId;
         this.status = status;
         this.type = type;
-        this.user = user;
     }
-
 
     public Spid() {
 
