@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-
 @SpringBootTest(classes = {SpidApplication.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SpidServiceTest {
@@ -21,22 +20,20 @@ class SpidServiceTest {
     SpidService spidService;
 
     @BeforeAll
-    public void setup() {
-        //testing changing the status of a SPID
+    public void setup() throws Exception {
         Spid spid = new Spid();
         spid.setId(1);
         spid.setStatus(Status.READY_FOR_REVIEW);
 
-        when(spidService.changeStatus(spid)).thenReturn(spid);
+        when(spidService.changeStatus(1)).thenReturn(spid);
     }
 
-    //testing databaase retrival of SPIDs
     @Test
-    public void testDatabaseRetrievalForSpids() {
+    public void testDatabaseRetrievalForSpids() throws Exception {
         Spid spid = new Spid();
         spid.setId(1);
         spid.setStatus(Status.READY_FOR_REVIEW);
-        assertEquals(spid, spidService.changeStatus(spid));
+        assertEquals(spid, spidService.changeStatus(1));
     }
 
 }
